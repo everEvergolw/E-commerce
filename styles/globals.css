@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+img{
+
+    max-height: 100%
+
+}
+
 
 input, textarea{
 

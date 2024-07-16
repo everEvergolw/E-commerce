@@ -23,6 +23,7 @@ export default async function handle(req,res){
     })
    
 
+
     const client = new S3Client({
         region: 'eu-north-1',
         credentials:{
@@ -34,6 +35,7 @@ export default async function handle(req,res){
     const links = [];
 
     for(const file of files.file){
+        // get expand
         const ext = file.originalFilename.split('.').pop();
         const newFileName = Date.now() + '.' + ext;
 
@@ -53,6 +55,9 @@ export default async function handle(req,res){
     }
 
    
+
+
+
 
 
     return res.json({links});
