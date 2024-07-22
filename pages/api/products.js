@@ -24,16 +24,14 @@ export default async function handle(req,res){
 
 
     if(method ==='POST'){
-       // 先检查并修改 category
-        if (req.body.category === "" || req.body.category === '0') {
-            req.body.category = null;
-        }
-        // 然后解构所有变量，此时 req.body.category 已经是更新后的值
-        const { title, description, price, images, category } = req.body;
+      
+        const { title, description, price, images, category, properties } = req.body;
 
         const productDoc =  await Product.create({
 
-            title,description,price,images,category,
+            title,description,price,images,
+            category:category || undefined,
+            properties,
 
 
         })
@@ -45,14 +43,16 @@ export default async function handle(req,res){
 
     if(method === 'PUT'){
 
-         // 先检查并修改 category
-         if (req.body.category === "" || req.body.category === '0') {
-            req.body.category = null;
-        }
-        // 然后解构所有变量，此时 req.body.category 已经是更新后的值
-        const { title, description, price, images, category,_id } = req.body;
+         
+        const { title, description, price, images, category,properties,_id } = req.body;
         
-        await Product.updateOne({_id}, {title,description,price,images,category});
+        await Product.updateOne({_id}, {
+            title,description,price,images,
+            category:category || undefined,
+            properties,
+
+        
+        });
         res.json(true);
     }
     
