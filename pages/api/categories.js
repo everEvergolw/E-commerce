@@ -1,11 +1,16 @@
 import { mongooseConnect } from "@/lib/mongoose";
+import { isAdminRequest } from "./auth/[...nextauth]";
+
 import {Category} from "@/models/Category"
+
 
 export default async function handle(req,res){
 
     const {method} = req;
 
-    await mongooseConnect();
+    await mongooseConnect(); 
+    await isAdminRequest(req,res);
+
 
     if(method ==='GET'){
 
